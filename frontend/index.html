@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy-Cat - Style Mimicry Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Copy-Cat</h1>
+        <div class="input-section">
+            <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+            <select id="styleSelect">
+                <option value="">Select writing style...</option>
+                <option value="academic">Academic</option>
+                <option value="casual">Casual</option>
+                <option value="professional">Professional</option>
+            </select>
+            <div class="buttons">
+                <button onclick="analyzeText()">Analyze Style</button>
+                <button onclick="generateText()">Generate Text</button>
+            </div>
+        </div>
+        <div id="results" class="results-section">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
