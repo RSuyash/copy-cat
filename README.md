@@ -137,7 +137,7 @@ Use `test.ps1` to run automated tests for all features:
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/copy-cat.git
+git clone https://github.com/rsuyash/copy-cat.git
 cd copy-cat
 ```
 

@@ -1,28 +1,33 @@
-from fastapi import FastAPI
-from app.api.endpoints import text_analysis, style_comparison, text_generation
+from data_loader import load_gutenberg_data, load_reuters_data, load_enron_data
+from data_cleaning import clean_text
 
-app = FastAPI(
-    title="Copy-Cat API",
-    description="API for text style analysis and generation",
-    version="1.0.0"
-)
+def main():
+    # Load data from Gutenberg
+    gutenberg_url = "https://www.gutenberg.org/files/2701/2701-h/2701-h.htm"  # Example: Moby Dick
+    gutenberg_text = load_gutenberg_data(gutenberg_url)
+    if gutenberg_text:
+        print(f"Loaded {len(gutenberg_text)} characters from Gutenberg")
+        cleaned_gutenberg_text = clean_text(gutenberg_text)
+        if cleaned_gutenberg_text:
+            print(f"Cleaned Gutenberg text: {len(cleaned_gutenberg_text)} characters")
+        else:
+            print("Failed to clean Gutenberg text.")
+    else:
+        print("Failed to load Gutenberg text.")
 
-# Include routers
-app.include_router(text_analysis.router, prefix="/api/v1/analyze", tags=["analysis"])
-app.include_router(style_comparison.router, prefix="/api/v1/compare", tags=["comparison"])
-app.include_router(text_generation.router, prefix="/api/v1/generate", tags=["generation"])
+    # Load data from Reuters (placeholder)
+    reuters_data = load_reuters_data()
+    if reuters_data:
+        print("Loaded Reuters data")
+    else:
+        print("Failed to load Reuters data.")
 
-@app.get("/")
-async def root():
-    return {"message": "Welcome to Copy-Cat API"}
-
-@app.get("/health")
-async def health_check():
-    return {
-        "status": "healthy",
-        "version": app.version
-    }
+    # Load data from Enron (placeholder)
+    enron_data = load_enron_data()
+    if enron_data:
+        print("Loaded Enron data")
+    else:
+        print("Failed to load Enron data.")
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    main()
