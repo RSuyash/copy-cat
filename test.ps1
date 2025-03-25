@@ -36,10 +36,11 @@ function Make-Request {
 
 # Run all tests with less verbose output
 $tests = @(
-    @{ Uri = "http://localhost:8000/health"; TestName = "Health Check" },
-    @{ Uri = "http://localhost:8000/test-cache"; TestName = "Cache Recording" },
-    @{ Uri = "http://localhost:8000/copy-cat/recorded-apis"; TestName = "List APIs" },
-    @{ Uri = "http://localhost:8000/copy-cat/replay/test-cache"; TestName = "Replay Test" }
+    #@{ Uri = "http://localhost:8000/health"; TestName = "Health Check" },
+    #@{ Uri = "http://localhost:8000/test-cache"; TestName = "Cache Recording" },
+    #@{ Uri = "http://localhost:8000/copy-cat/recorded-apis"; TestName = "List APIs" },
+    #@{ Uri = "http://localhost:8000/copy-cat/replay/test-cache"; TestName = "Replay Test" },
+    @{ Uri = "http://localhost:8001/load_gutenberg"; TestName = "Load Gutenberg Data" }
 )
 
 foreach ($test in $tests) {
@@ -48,24 +49,24 @@ foreach ($test in $tests) {
 }
 
 # Cache test with multiple requests
-Write-Host "`n=== Cache Test ===" -ForegroundColor Cyan
-1..3 | ForEach-Object {
-    Make-Request -Uri "http://localhost:8000/quick-cache-test" -TestName "Cache Request $_"
-    Start-Sleep -Milliseconds 500
-}
+#Write-Host "`n=== Cache Test ===" -ForegroundColor Cyan
+#1..3 | ForEach-Object {
+#    Make-Request -Uri "http://localhost:8000/quick-cache-test" -TestName "Cache Request $_"
+#    Start-Sleep -Milliseconds 500
+#}
 
 # 6. Test recording new API
-$body = @{
-    targetUrl = 'https://jsonplaceholder.typicode.com/todos/1'  # Changed from api.example.com to a real API
-    method = 'GET'
-} | ConvertTo-Json
+#$body = @{
+#    targetUrl = 'https://jsonplaceholder.typicode.com/todos/1'  # Changed from api.example.com to a real API
+#    method = 'GET'
+#} | ConvertTo-Json
 
-Make-Request -Uri "http://localhost:8000/copy-cat/record" -Method "POST" -Body $body -TestName "Record New API"
+#Make-Request -Uri "http://localhost:8000/copy-cat/record" -Method "POST" -Body $body -TestName "Record New API"
 
 # Test external API recording
-$externalApiTest = @{
-    targetUrl = 'https://jsonplaceholder.typicode.com/posts/1'
-    method = 'GET'
-} | ConvertTo-Json
+#$externalApiTest = @{
+#    targetUrl = 'https://jsonplaceholder.typicode.com/posts/1'
+#    method = 'GET'
+#} | ConvertTo-Json
 
-Make-Request -Uri "http://localhost:8000/copy-cat/record" -Method "POST" -Body $externalApiTest -TestName "Record External API"
+#Make-Request -Uri "http://localhost:8000/copy-cat/record" -Method "POST" -Body $externalApiTest -TestName "Record External API"

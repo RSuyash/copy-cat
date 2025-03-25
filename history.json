@@ -175,6 +175,26 @@
         "test-all.ps1"
       ],
       "version": "1.0.5"
+    },
+    {
+      "timestamp": "2025-03-25T04:30:00Z",
+      "microfeature": "Flask API Endpoint for Gutenberg Data",
+      "description": "Added a Flask API endpoint to load and clean Gutenberg data",
+      "changes": [
+        {
+          "type": "feature",
+          "component": "endpoint",
+          "path": "/load_gutenberg",
+          "method": "GET",
+          "details": "Added Flask API endpoint to load and clean Gutenberg data"
+        }
+      ],
+      "files_changed": [
+        "backend/app.py",
+        "backend/data_loader.py",
+        "backend/data_cleaning.py"
+      ],
+      "version": "1.1.0"
     }
   ],
   "project": "Copy-Cat API Server",
